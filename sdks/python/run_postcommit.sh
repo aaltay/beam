@@ -68,16 +68,16 @@ SDK_LOCATION=$(find dist/apache-beam-*.tar.gz)
 # and validate that jobs finish successfully.
 echo ">>> RUNNING TEST DATAFLOW RUNNER it tests"
 python setup.py nosetests \
-  --attr IT \
+  --attr ITFX \
   --nocapture \
   --processes=4 \
   --process-timeout=1800 \
   --test-pipeline-options=" \
     --runner=TestDataflowRunner \
-    --project=$PROJECT \
-    --staging_location=$GCS_LOCATION/staging-it \
-    --temp_location=$GCS_LOCATION/temp-it \
-    --output=$GCS_LOCATION/py-it-cloud/output \
+    --project=google.com:clouddfe \
+    --staging_location=gs://clouddfe-altay/test/staging-it \
+    --temp_location=gs://clouddfe-altay/test/temp-it \
+    --output=gs://clouddfe-altay/test/py-it-cloud/output \
     --sdk_location=$SDK_LOCATION \
     --num_workers=1 \
     --sleep_secs=20"
