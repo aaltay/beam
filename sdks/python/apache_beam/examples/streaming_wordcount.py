@@ -70,6 +70,14 @@ def run(argv=None):
     (word, ones) = word_ones
     return (word, sum(ones))
 
+  def cross_product(elem, sides):
+    for side in sides:
+      import logging
+      logging.info("OUT: %s, %s", elem, side)
+
+  side = lines | beam.Map(lambda x: str(x).upper())
+  lines | beam.FlatMap(cross_product, beam.pvalue.AsList(side))
+
   counts = (lines
             | 'split' >> (beam.ParDo(WordExtractingDoFn())
                           .with_output_types(six.text_type))
